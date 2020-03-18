@@ -1,7 +1,11 @@
 import { Module } from '@nestjs/common';
-import { TeachersController } from './teachers/teachers.controller';
+import { MongooseModule } from '@nestjs/mongoose';
+import { TeachersModule } from './teachers/teachers.module';
 
 @Module({
-  controllers: [TeachersController],
+  imports: [
+    MongooseModule.forRoot('mongodb://localhost/class-demo'),
+    TeachersModule
+  ]
 })
-export class AppModule {}
+export class AppModule { }
