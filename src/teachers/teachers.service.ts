@@ -3,10 +3,13 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Teacher } from './interfaces/teacher.interface';
 import { CreateTeacherDto } from './create-teacher.dto';
+import { CustomLogger } from 'src/helpers/custom-logger';
 
 @Injectable()
 export class TeachersService {
-  constructor(@InjectModel('Teacher') private readonly teacherModel: Model<Teacher>) {}
+  constructor(@InjectModel('Teacher') private readonly teacherModel: Model<Teacher>, private logger: CustomLogger) {
+    this.logger.setContext('TeachersService');
+  }
 
   async create(createTeacherDto: CreateTeacherDto): Promise<Teacher> {
     const createdTeacher = new this.teacherModel(createTeacherDto);

@@ -1,13 +1,13 @@
 import { IsString, IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateTeacherDto {
+export class CreateStudentDto {
 
   @IsString()
   @IsNotEmpty()
   @ApiProperty({
     type: String,
-    description: 'The teacher\'s name'
+    description: 'The student\'s name'
   })
   readonly name: string
 }
