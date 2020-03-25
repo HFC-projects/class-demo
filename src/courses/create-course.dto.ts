@@ -12,12 +12,12 @@ export class CreateCourseDto {
   })
   readonly name: string
 
+  @IsNotEmpty()
   @IsMongoId()
   @Validate(ClassValidator, {message: 'invalid class id'})
-  @IsNotEmpty()
   @ApiProperty({
     type: String,
-    description: 'The ID of course\'s class entitys'
+    description: 'The ID of course\'s class entitys' 
   })
   readonly class: string
 

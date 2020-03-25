@@ -6,6 +6,9 @@ export class ClassValidator implements ValidatorConstraintInterface{
   constructor(private classesService: ClassesService){}
 
   async validate(classId: String, args: ValidationArguments){
-    return await (this.classesService.findOne(classId)) == null;
+    try{
+      return await (this.classesService.findOne(classId)) != null;
+    }
+    catch(err){ return true; }
   }
 }

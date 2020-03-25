@@ -5,10 +5,11 @@ import { CourseSchema } from './schemas/course.schema';
 import { CustomLogger } from 'src/helpers/custom-logger';
 import { CoursesService } from './courses.service';
 import { ClassesModule } from 'src/classes/classes.module';
+import { ClassValidator } from 'src/classes/validators/class.validator';
 
 @Module({
   controllers: [CoursesController],
-  providers: [CustomLogger, CoursesService],
+  providers: [CustomLogger, CoursesService, ClassValidator],
   exports: [CustomLogger],
   imports: [MongooseModule.forFeature([{name: 'Course', schema: CourseSchema}]), ClassesModule]
 })
