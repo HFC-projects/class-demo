@@ -7,13 +7,11 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch via NPM",
-      "runtimeExecutable": "npm",
-      "runtimeArgs": [
-        "run-script",
-        "start:debug"
-      ],
-      "port": 9229
+      "name": "Launch Program",
+      "program": "${workspaceFolder}/dist/main.js",
+      "skipFiles": [
+        "<node_internals>/**"
+      ]
     }
   ]
 }

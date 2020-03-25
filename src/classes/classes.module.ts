@@ -13,7 +13,8 @@ import { CustomLogger } from 'src/helpers/custom-logger';
     ClassesService
   ],
   exports: [
-    CustomLogger
+    CustomLogger,
+    ClassesService
   ]
 })
 export class ClassesModule {}

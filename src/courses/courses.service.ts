@@ -4,10 +4,12 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Course } from './interfaces/course.interface';
 import { CreateCourseDto } from './create-course.dto';
 import { CustomLogger } from 'src/helpers/custom-logger';
+import { ClassesService } from 'src/classes/classes.service';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class CoursesService {
-  constructor(@InjectModel('Course') private readonly courseModel: Model<Course>, private logger: CustomLogger) {
+  constructor(@InjectModel('Course') private readonly courseModel: Model<Course>, private logger: CustomLogger, private configService: ConfigService) {
     this.logger.setContext('CoursesService');
   }
 
@@ -17,6 +19,7 @@ export class CoursesService {
   }
 
   async findAll(): Promise<Course[]> {
+    console.log(this.configService.get<string>('other.otherValue'));
     return this.courseModel.find()
       .populate([
         'class',

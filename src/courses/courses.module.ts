@@ -3,12 +3,13 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { CoursesController } from './courses.controller';
 import { CourseSchema } from './schemas/course.schema';
 import { CustomLogger } from 'src/helpers/custom-logger';
-import { ClassesService } from 'src/classes/classes.service';
+import { CoursesService } from './courses.service';
+import { ClassesModule } from 'src/classes/classes.module';
 
 @Module({
-  imports: [MongooseModule.forFeature([{name: 'Course', schema: CourseSchema}])],
   controllers: [CoursesController],
-  providers: [CustomLogger, ClassesService],
-  exports: [CustomLogger]
+  providers: [CustomLogger, CoursesService],
+  exports: [CustomLogger],
+  imports: [MongooseModule.forFeature([{name: 'Course', schema: CourseSchema}]), ClassesModule]
 })
 export class CoursesModule {}

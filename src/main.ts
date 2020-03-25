@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { useContainer } from 'class-validator';
 import { ValidationPipe, Logger } from '@nestjs/common';
 
 async function bootstrap() {
@@ -12,7 +13,10 @@ async function bootstrap() {
   app.useLogger(new Logger());
 
   // configure the validation pipe for recived data from request
-  app.useGlobalPipes(new ValidationPipe())
+  app.useGlobalPipes(new ValidationPipe());
+
+  // hint to solve di validator problem
+  // useContainer(app.select(AppModule), { fallbackOnErrors: true });
 
   // swagger configuration
   const options = new DocumentBuilder()
@@ -24,6 +28,8 @@ async function bootstrap() {
   const document =  SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('swagger', app, document);
 
-  await app.listen(3000);
+  const port = process.env.PORT || 3000;
+  await app.listen(port);
+  console.log(`App listening on port ${port}`);
 }
 bootstrap();
