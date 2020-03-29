@@ -4,10 +4,11 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Class } from './interfaces/class.interface';
 import { CreateClassDto } from './create-class.dto';
 import { CustomLogger } from 'src/helpers/custom-logger';
+import { MyLibraryService } from 'someprefix/my-library';
 
 @Injectable()
 export class ClassesService {
-  constructor(@InjectModel('Class') private readonly classModel: Model<Class>, private logger: CustomLogger) {
+  constructor(@InjectModel('Class') private readonly classModel: Model<Class>, private logger: CustomLogger, private lib: MyLibraryService) {
     this.logger.setContext('ClasssService');
   }
 
@@ -17,6 +18,7 @@ export class ClassesService {
   }
 
   async findAll(): Promise<Class[]> {
+    this.lib.sayHello();
     return this.classModel.find().exec();
   }
 
